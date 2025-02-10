@@ -12,7 +12,13 @@
                 "PG_TURING_AUDIT": {"n_iters": 100},
                 "PG_BORAI_AUDIT": {"max_iter": 100},
                 "PG_SMARTNOISE_AUDIT": {"max_iter": 100}},
-              "n_pgs": 1000},
+              "pgs_kwargs_fit": {
+                "PG_ORIGINAL_AUDIT": {},
+                "PG_UPDATED_AUDIT": {},
+                "PG_SYNTHCITY_AUDIT": {},
+                "PG_TURING_AUDIT": {},
+                "PG_BORAI_AUDIT": {"lap_scale": 0.001},
+                "PG_SMARTNOISE_AUDIT": {}}},
 
 "evaluation": {"alpha": 0.1,
                "n_train": 400,

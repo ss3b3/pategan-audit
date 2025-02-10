@@ -1,6 +1,6 @@
 ## The Elusive Pursuit of Reproducing PATE-GAN: Benchmarking, Auditing, Debugging
 
-This repository contains the source code for the paper The Elusive Pursuit of Replicating PATE-GAN: Benchmarking, Auditing, Debugging by G. Ganev, M.S.M.S. Annamalai, E. De Cristofaro
+This repository contains the source code for the paper The Elusive Pursuit of Reproducing PATE-GAN: Benchmarking, Auditing, Debugging by G. Ganev, M.S.M.S. Annamalai, E. De Cristofaro, [TMLR 2025](https://openreview.net/forum?id=wcxrJcJ7vq)
 
 
 ## Install
@@ -35,6 +35,8 @@ The utility results are presented and discussed in Section 5.
 The utility scripts are:
 
 * `code/eval_utility_cli.py`
+* `code/eval_utility_hyp_cli.py`
+* `code/eval_utility_cond_cli.py`
 * `code/eval_utility_teachers_cli.py`
 
 To (re)create the files in `data/results/utility`, one can run the commands in `scripts_utility.txt` from `code`.

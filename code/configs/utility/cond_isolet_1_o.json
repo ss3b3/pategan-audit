@@ -1,0 +1,17 @@
+{
+"data": {"df_name": "isolet",
+         "df_path": "../data/isolet/train_isolet.pkl.gz",
+         "test_df_path": "../data/isolet/test_isolet.pkl.gz",
+         "save_eval_path": "../data/results/utility/cond_isolet_results_1_o.pkl.gz"},
+
+"generation": {"epsilons": [1],
+               "delta": 1e-5,
+               "teachers_ratio": 1000,
+               "pgs": ["PG_ORIGINAL_COND"],
+               "pgs_kwargs": {
+                 "PG_ORIGINAL_COND": {}},
+               "n_pgs_per_epsilon": 3,
+               "n_synth_dfs_per_pg": 3},
+
+"evaluation": {"classifiers": "all"}
+}

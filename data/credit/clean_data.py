@@ -50,7 +50,7 @@ df["Class"] = df["Class"].astype("int16")
 # train test split
 train_df, test_df = train_test_split(df, stratify=df["Class"], test_size=0.2, random_state=13)
 
-# save adult
+# save data
 train_df = train_df.reset_index(drop=True)
 test_df = test_df.reset_index(drop=True)
 

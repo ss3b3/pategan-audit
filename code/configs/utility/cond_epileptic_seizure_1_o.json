@@ -1,0 +1,17 @@
+{
+"data": {"df_name": "epileptic_seizure",
+         "df_path": "../data/epileptic_seizure/train_epileptic_seizure.pkl.gz",
+         "test_df_path": "../data/epileptic_seizure/test_epileptic_seizure.pkl.gz",
+         "save_eval_path": "../data/results/utility/cond_epileptic_seizure_results_1_o.pkl.gz"},
+
+"generation": {"epsilons": [1],
+               "delta": 1e-5,
+               "teachers_ratio": 1000,
+               "pgs": ["PG_ORIGINAL_COND"],
+               "pgs_kwargs": {
+                 "PG_ORIGINAL_COND": {}},
+               "n_pgs_per_epsilon": 3,
+               "n_synth_dfs_per_pg": 3},
+
+"evaluation": {"classifiers": "all"}
+}

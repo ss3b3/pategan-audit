@@ -52,6 +52,7 @@ def pate_lamda(x, teacher_models, lamda):
     n0 = float(sum(y_hat == 0))
     n1 = float(sum(y_hat == 1))
 
+    # BUG!!!
     lap_noise = np.random.laplace(loc=0.0, scale=lamda)
 
     out = (n1 + lap_noise) / float(n0 + n1)
@@ -77,11 +78,12 @@ class PG_UPDATED_AUDIT:
     '''
     def __init__(self, X_shape,
                  epsilon=1.0, delta=1e-5, lamda=1.0, num_teachers=10,
-                 max_iter=10000, n_s=1, batch_size=64, record_teachers=False):
+                 lr=1e-4, max_iter=10000, n_s=1, batch_size=64, record_teachers=False):
 
         # Reset the graph
         tf.reset_default_graph()
 
+        self.lr = lr
         # PATE-GAN parameters
         self.max_iter = max_iter
         # number of student training iterations
@@ -215,8 +217,8 @@ class PG_UPDATED_AUDIT:
             G_loss = -tf.reduce_mean(S_fake)
 
             # Optimizer
-            S_solver = (tf.train.RMSPropOptimizer(learning_rate=1e-4).minimize(-S_loss, var_list=self.theta_S))
-            G_solver = (tf.train.RMSPropOptimizer(learning_rate=1e-4).minimize(G_loss, var_list=self.theta_G))
+            S_solver = (tf.train.RMSPropOptimizer(learning_rate=self.lr).minimize(-S_loss, var_list=self.theta_S))
+            G_solver = (tf.train.RMSPropOptimizer(learning_rate=self.lr).minimize(G_loss, var_list=self.theta_G))
 
             clip_S = [p.assign(tf.clip_by_value(p, -0.01, 0.01)) for p in self.theta_S]
 
@@ -334,6 +336,7 @@ class PG_UPDATED_AUDIT:
 
             # ### Renormalization
             x_train_hat = self.processor.inverse_transform(x_train_hat)
+            x_train_hat = np.clip(x_train_hat, self.processor.data_min_, self.processor.data_max_)
 
         return x_train_hat
 

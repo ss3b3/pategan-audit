@@ -19,6 +19,6 @@ train_df.loc[vowels_idx, "class"], train_df.loc[~vowels_idx, "class"] = 1, 0
 vowels_idx = test_df["class"].isin(vowels)
 test_df.loc[vowels_idx, "class"], test_df.loc[~vowels_idx, "class"] = 1, 0
 
-# save adult
+# save data
 train_df.to_pickle("train_isolet.pkl.gz", compression="gzip")
 test_df.to_pickle("test_isolet.pkl.gz", compression="gzip")

@@ -29,6 +29,7 @@ def bb_get_auc_est_eps(out_data, in_data, n_train, n_valid, n_test, delta, alpha
                                 clf.predict_proba(in_data[n_train:])[:, 1]])
     mia_labels = np.array([0] * (n_valid + n_test) + [1] * (n_valid + n_test))
     auc = roc_auc_score(mia_labels, mia_preds)
+    auc = max(auc, 1 - auc)
 
     # estimate epsilon
     scoress = np.concatenate([mia_preds.reshape(-1, 1), mia_labels.reshape(-1, 1)], axis=1)
@@ -54,6 +55,10 @@ def estimate_eps(scoress, n_valid, alpha=0.1, delta=0, method='all', n_procs=32,
     fp = np.sum(mia_scores_test[mia_labels_test == 0] >= opt_t)
     fn = np.sum(mia_scores_test[mia_labels_test == 1] < opt_t)
     tn = np.sum(mia_scores_test[mia_labels_test == 0] < opt_t)
+    if fp == 0:
+        fp += 1
+    if fn == 0:
+        fn += 1
 
     results = AttackResults(FN=fn, FP=fp, TN=tn, TP=tp)
     return compute_eps_lower_single(results, alpha, delta, method=method)
@@ -75,6 +80,10 @@ def compute_eps_lower_from_mia(scores, labels, alpha, delta, method='all', n_pro
         fp = np.sum(scores[labels == 0] >= t)
         fn = np.sum(scores[labels == 1] < t)
         tn = np.sum(scores[labels == 0] < t)
+        if fp == 0:
+            fp += 1
+        if fn == 0:
+            fn += 1
 
         results = AttackResults(FN=fn, FP=fp, TN=tn, TP=tp)
         resultss.append((t, results))

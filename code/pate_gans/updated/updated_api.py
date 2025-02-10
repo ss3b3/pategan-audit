@@ -50,6 +50,7 @@ def pate_lamda(x, teacher_models, lamda):
     n0 = float(sum(y_hat == 0))
     n1 = float(sum(y_hat == 1))
 
+    # BUG!!!
     lap_noise = np.random.laplace(loc=0.0, scale=lamda)
 
     out = (n1 + lap_noise) / float(n0 + n1)
@@ -75,7 +76,7 @@ class PG_UPDATED:
     '''
     def __init__(self, X_shape,
                  epsilon=1.0, delta=1e-5, lamda=1.0, num_teachers=10,
-                 max_iter=10000, n_s=1, batch_size=64):
+                 max_iter=10000, n_s=5, batch_size=64):
 
         # Reset the graph
         tf.reset_default_graph()
